@@ -1,14 +1,14 @@
 const express = require('express');
-const Product = require('../models/developments');
+const Devs = require('../models/developments');
 
 const router = express.Router();
 
 
 
 router.get('/developments', (req,res)=> {
-    Product.find()
-    .then((products)=> {
-        res.send(products);
+    Devs.find()
+    .then((development)=> {
+        res.send(development);
     })
     .catch((err)=>res.send(err));
 });
@@ -19,10 +19,10 @@ router.get('/developments', (req,res)=> {
 router.post('/development', (req, res) => {
     console.log(req.body)
 
-    const product = new Product(req.body);
-    product.save()
+    const development = new Devs(req.body);
+    development.save()
         .then(() => {
-            res.send(product);
+            res.send(development);
         })
         .catch((err) => {
             res.status(500).send(err);
@@ -33,9 +33,9 @@ router.post('/development', (req, res) => {
 
 router.get('/development/:id', (req, res) => {
     const { id } = req.params;
-   Product.findById(id)
-   .then((product)=>{
-       res.send(product);
+    Devs.findById(id)
+   .then((development)=>{
+       res.send(development);
    })
    .catch((err)=> {
        res.send(err);
@@ -44,9 +44,9 @@ router.get('/development/:id', (req, res) => {
 
 router.delete('/development/:id', (req, res) => {
     const { id } = req.params;
-   Product.findByIdAndDelete(id)
-   .then((product)=>{
-       res.send(product);
+    Devs.findByIdAndDelete(id)
+   .then((development)=>{
+       res.send(development);
    })
    .catch((err)=> {
        res.send(err);
